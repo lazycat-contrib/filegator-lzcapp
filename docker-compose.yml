@@ -1,0 +1,13 @@
+services:
+  filegator:
+    image: docker.hlmirror.com/filegator/filegator:v7.13.0
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - repository:/var/www/filegator/repository
+      - private:/var/www/filegator/private
+
+volumes:
+  repository:
+  private:

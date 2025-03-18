@@ -1,0 +1,52 @@
+lzc-sdk-version: "0.1"
+name: FileGator
+package: cloud.lzaycat.app.filegator
+version: 7.13.0
+description: 功能强大的多用户文件管理器
+homepage: https://github.com/filegator/filegator
+author: filegator
+application:
+  subdomain: filegator
+  background_task: true
+  multi_instance: false
+  gpu_accel: false
+  kvm_accel: false
+  usb_accel: false
+  public_path:
+    - /
+  routes:
+    - /=http://filegator.cloud.lzaycat.app.filegator.lzcapp:8080/
+services:
+  filegator:
+    image: docker.hlmirror.com/filegator/filegator:v7.13.0
+    binds:
+      - /lzcapp/var/repository:/var/www/filegator/repository
+      - /lzcapp/var/private:/var/www/filegator/private
+      - /lzcapp/var/logs:/private/logs
+   
+    setup_script: |
+    
+      mkdir -p /var/www/filegator/private/sessions
+      
+      chmod -R 777 /private
+      chmod -R 777 /private/logs
+      
+      chown -R www-data:www-data /private
+      chown -R www-data:www-data /private/logs
+      
+      ln -sf /private/logs /var/www/filegator/private/logs
+      
+      if [ ! -f /var/www/filegator/private/.htaccess ]; then
+        echo "deny from all" | tee /var/www/filegator/private/.htaccess > /dev/null
+      fi
+      if [ ! -f /var/www/filegator/private/users.json.blank ]; then
+        cp /lzcapp/pkg/content/users.json.blank /var/www/filegator/private/users.json.blank
+      fi
+      
+      chown -R www-data:www-data /var/www/filegator/
+      chmod -R 775 /var/www/filegator/
+      
+      
+      
+
+    

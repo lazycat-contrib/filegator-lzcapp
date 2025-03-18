@@ -1,0 +1,36 @@
+{
+  "name": "FileGator",
+  "package": "cloud.lzaycat.app.filegator",
+  "description": "功能强大的多用户文件管理器",
+  "homepage": "https://github.com/filegator/filegator",
+  "author": "filegator",
+  "app_features": [
+    "background_task",
+    "public_path"
+  ],
+  "subdomain": "filegator",
+  "version": "7.13.0",
+  "public_paths": [
+    "/"
+  ],
+  "iconPath": "logo.png",
+  "composePath": "docker-compose.yml",
+  "unsupported_platforms": [],
+  "lastRouteType": "from_compose",
+  "port_mappings": {
+    "filegator_8080_8080": {
+      "use": true,
+      "type": "http",
+      "path": "/",
+      "targetPath": "/"
+    }
+  },
+  "image_docker.hlmirror.com_filegator_filegator_v7.13.0": {
+    "originalImage": "docker.hlmirror.com/filegator/filegator:v7.13.0",
+    "pushTarget": "none"
+  },
+  "filegator_volume_repository_/var/www/filegator/repository_action": "emptyDir",
+  "filegator_volume_/var/www/filegator/repository_location": "app_data",
+  "filegator_volume_private_/var/www/filegator/private_action": "emptyDir",
+  "filegator_volume_/var/www/filegator/private_location": "app_data"
+}
