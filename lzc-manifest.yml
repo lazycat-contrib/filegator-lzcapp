@@ -7,11 +7,10 @@ application:
   upstreams:
     - location: /
       backend: http://filegator.cloud.lzaycat.app.filegator.lzcapp:8080/
-
 services:
   filegator:
-    # upstream: filegator/filegator:v7.13.0
-    image: filegator/filegator:v7.13.0
+    # upstream: filegator/filegator:v7.16.3
+    image: registry.lazycat.cloud/czyt/filegator/filegator:ad929e4721c08a17
     binds:
       - /lzcapp/var/repository:/var/www/filegator/repository
       - /lzcapp/var/private:/var/www/filegator/private
